@@ -140,7 +140,7 @@ namespace NcLibrary
             Cadr cadr = new Cadr();
             cadr.type = "M4";
             int powerPosition = cadrString.ToUpper().IndexOf("S");
-            string power = cadrString.Substring(powerPosition + 1);
+            string power = cadr.ParseNumberInt(cadrString, "S");
             cadr.S = Convert.ToInt32(power);
             return cadr;
         }
@@ -150,7 +150,7 @@ namespace NcLibrary
             Cadr cadr = new Cadr();
             cadr.type = "M3";
             int powerPosition = cadrString.ToUpper().IndexOf("S");
-            string power = cadrString.Substring(powerPosition + 1);
+            string power = cadr.ParseNumberInt(cadrString, "S");
             cadr.S = Convert.ToInt32(power);
             return cadr;
         }
@@ -159,32 +159,16 @@ namespace NcLibrary
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
             Cadr cadr = new Cadr();
-            int xPos, yPos, xDelta, yDelta;
-            string coords;
+            int xPos, yPos;
+
             cadr.type = "G0";
             xPos = cadrString.ToUpper().IndexOf("X");
             yPos = cadrString.ToUpper().IndexOf("Y");
             if (xPos==-1 && yPos==-1) return cadr;
             if (xPos!=-1 && yPos != -1)
             {
-                if (yPos > xPos)
-                {
-                    coords = cadrString.Substring(xPos);
-                    xPos = coords.ToUpper().IndexOf("X")+1;
-                    yPos = coords.ToUpper().IndexOf("Y")+1;
-                    xDelta = yPos-1 - xPos;
-                    yDelta = coords.Length - yPos;
-                } else
-                {
-                    coords = cadrString.Substring(xPos);
-                    xPos = coords.ToUpper().IndexOf("X") + 1;
-                    yPos = coords.ToUpper().IndexOf("Y") + 1;
-                    xDelta = xPos - 1 - yPos;
-                    yDelta = coords.Length - xPos;
-
-                }
-                cadr.X =decimal.Parse(coords.Substring(xPos,xDelta),formatter);
-                cadr.Y = decimal.Parse(coords.Substring(yPos, yDelta), formatter);
+                cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString,"X"), formatter);
+                cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.xEnable = true;
                 cadr.yEnable = true;
                 return cadr;
@@ -192,18 +176,14 @@ namespace NcLibrary
 
             if (xPos!=-1)
             {
-                coords = cadrString.Substring(xPos);
-                xPos = coords.ToUpper().IndexOf("X") + 1;
-                cadr.X = decimal.Parse(coords.Substring(xPos), formatter);
+                cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
                 cadr.xEnable = true;
                 return cadr;
             }
 
             if (yPos != -1)
             {
-                coords = cadrString.Substring(yPos);
-                yPos = coords.ToUpper().IndexOf("Y") + 1;
-                cadr.Y = decimal.Parse(coords.Substring(yPos), formatter);
+                cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.yEnable = true;
                 return cadr;
             }
@@ -214,12 +194,13 @@ namespace NcLibrary
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
             Cadr cadr = new Cadr();
-            int xPos, yPos, xDelta, yDelta;
-            string coords;
+            int xPos, yPos;
+
             cadr.type = "G1";
 
             int speedPosition = cadrString.ToUpper().IndexOf("F");
-            string speed = cadrString.Substring(speedPosition + 1);
+            
+            string speed = cadr.ParseNumberInt(cadrString, "F");
             cadr.F = Convert.ToInt32(speed);
 
             cadrString = cadrString.Substring(0, (cadrString.Length-((cadrString.Length-speedPosition))));
@@ -229,45 +210,23 @@ namespace NcLibrary
             if (xPos == -1 && yPos == -1) return cadr;
             if (xPos != -1 && yPos != -1)
             {
-                if (yPos > xPos)
-                {
-                    coords = cadrString.Substring(xPos);
-                    xPos = coords.ToUpper().IndexOf("X") + 1;
-                    yPos = coords.ToUpper().IndexOf("Y") + 1;
-                    xDelta = yPos - 1 - xPos;
-                    yDelta = coords.Length - yPos;
-                }
-                else
-                {
-                    coords = cadrString.Substring(xPos);
-                    xPos = coords.ToUpper().IndexOf("X") + 1;
-                    yPos = coords.ToUpper().IndexOf("Y") + 1;
-                    xDelta = xPos - 1 - yPos;
-                    yDelta = coords.Length - xPos;
-
-                }
-                cadr.X = decimal.Parse(coords.Substring(xPos, xDelta), formatter);
-                cadr.Y = decimal.Parse(coords.Substring(yPos, yDelta), formatter);
+                cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
+                cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.xEnable = true;
                 cadr.yEnable = true;
-
                 return cadr;
             }
 
             if (xPos != -1)
             {
-                coords = cadrString.Substring(xPos);
-                xPos = coords.ToUpper().IndexOf("X") + 1;
-                cadr.X = decimal.Parse(coords.Substring(xPos), formatter);
+                cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
                 cadr.xEnable = true;
                 return cadr;
             }
 
             if (yPos != -1)
             {
-                coords = cadrString.Substring(yPos);
-                yPos = coords.ToUpper().IndexOf("Y") + 1;
-                cadr.Y = decimal.Parse(coords.Substring(yPos), formatter);
+                cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.yEnable = true;
                 return cadr;
             }
@@ -278,36 +237,18 @@ namespace NcLibrary
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
             Cadr cadr = new Cadr();
-            int xPos, yPos, xDelta, yDelta;
-            string coords;
+            int xPos, yPos;
+
             cadr.type = "XY";
             xPos = cadrString.ToUpper().IndexOf("X");
             yPos = cadrString.ToUpper().IndexOf("Y");
             if (xPos == -1 && yPos == -1) return cadr;
             if (xPos != -1 && yPos != -1)
             {
-                if (yPos > xPos)
-                {
-                    coords = cadrString.Substring(xPos);
-                    xPos = coords.ToUpper().IndexOf("X") + 1;
-                    yPos = coords.ToUpper().IndexOf("Y") + 1;
-                    xDelta = yPos - 1 - xPos;
-                    yDelta = coords.Length - yPos;
-                }
-                else
-                {
-                    coords = cadrString.Substring(xPos);
-                    xPos = coords.ToUpper().IndexOf("X") + 1;
-                    yPos = coords.ToUpper().IndexOf("Y") + 1;
-                    xDelta = xPos - 1 - yPos;
-                    yDelta = coords.Length - xPos;
-
-                }
-                cadr.X = decimal.Parse(coords.Substring(xPos, xDelta), formatter);
-                cadr.Y = decimal.Parse(coords.Substring(yPos, yDelta), formatter);
+                cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
+                cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.xEnable = true;
                 cadr.yEnable = true;
-
                 return cadr;
             }
             return null;
@@ -318,16 +259,14 @@ namespace NcLibrary
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
             Cadr cadr = new Cadr();
             int xPos;
-            string coords;
+
             cadr.type = "XX";
 
             xPos = cadrString.ToUpper().IndexOf("X");
 
             if (xPos != -1)
             {
-                coords = cadrString.Substring(xPos);
-                xPos = coords.ToUpper().IndexOf("X") + 1;
-                cadr.X = decimal.Parse(coords.Substring(xPos), formatter);
+                cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
                 cadr.xEnable = true;
                 return cadr;
             }
@@ -339,20 +278,59 @@ namespace NcLibrary
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
             Cadr cadr = new Cadr();
             int yPos;
-            string coords;
+
             cadr.type = "YY";
         
             yPos = cadrString.ToUpper().IndexOf("Y");
 
             if (yPos != -1)
             {
-                coords = cadrString.Substring(yPos);
-                yPos = coords.ToUpper().IndexOf("Y") + 1;
-                cadr.Y = decimal.Parse(coords.Substring(yPos), formatter);
+                cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.yEnable = true;
                 return cadr;
             }
             return null;
         }
+
+        private string ParseNumberDecimal(string cadr, string dimension)
+        {
+            cadr = cadr.Replace(" ", "");
+            int pos = cadr.IndexOf(dimension);
+            string number = "";
+
+            for (int i = pos + 1; i < cadr.Length; i++)
+            {
+                if (Char.IsDigit(cadr[i]) || cadr[i] == '.')
+                {
+                    number += cadr[i];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return number;
+        }
+
+        private string ParseNumberInt(string cadr, string dimension)
+        {
+            cadr = cadr.Replace(" ", "");
+            int pos = cadr.IndexOf(dimension);
+            string number = "";
+
+            for (int i = pos + 1; i < cadr.Length; i++)
+            {
+                if (Char.IsDigit(cadr[i]))
+                {
+                    number += cadr[i];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return number;
+        }
+
     }
 }
