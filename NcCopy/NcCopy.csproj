@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NcCopy\NCLibrary\NCLibrary.csproj" />
+    <ProjectReference Include="..\NCLibrary\NCLibrary.csproj" />
   </ItemGroup>
 
 </Project>
