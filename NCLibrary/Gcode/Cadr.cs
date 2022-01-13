@@ -5,15 +5,53 @@ using System.Text;
 
 namespace NcLibrary
 {
+    /// <summary>
+    /// Represents the data of a single frame of the g-code program and the means to convert it into data or string
+    /// </summary>
     public class Cadr
     {
+        #region data frame
+        /// <summary>
+        /// Type of frame, possible options - M5, M3, M4, G0, G1, XY, XX, YY, NO  
+        /// </summary>
         public string type { get; set; }
+
+        /// <summary>
+        /// Laser power 
+        /// </summary>
         public int S { get; set; }
+
+        /// <summary>
+        /// Feed rate
+        /// </summary>
         public int F { get; set; }
+
+        /// <summary>
+        /// X coordinate
+        /// </summary>
         public decimal X { get; set; }
+
+        /// <summary>
+        /// Y coordinate
+        /// </summary>
         public decimal Y { get; set; }
+
+        /// <summary>
+        /// The presence of the X coordinate value in the frame 
+        /// </summary>
         public bool xEnable { get; set; }
+
+        /// <summary>
+        /// The presence of the Y coordinate value in the frame 
+        /// </summary>
         public bool yEnable { get; set; }
+        #endregion
+
+        /// <summary>
+        /// Converting a data frame to a string g-code frame representation. 
+        /// </summary>
+        /// <param name="cadr">data frame(required)</param>
+        /// <returns>g-code frame</returns>
         public string CadrToString(Cadr cadr)
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
@@ -81,6 +119,12 @@ namespace NcLibrary
             }
             return cadrString.ToString();
         }
+
+        /// <summary>
+        /// Converting g-code frame string representation to program data frame.
+        /// </summary>
+        /// <param name="cadrString">g-code frame (required)</param>
+        /// <returns>data frame</returns>
         public Cadr StringToCadr(string cadrString)
         {
             Cadr cadr = new Cadr();
@@ -121,6 +165,11 @@ namespace NcLibrary
             return parseNO();
         }
 
+        #region parsers
+        /// <summary>
+        /// Parsing the string representation of a frame of type NO
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseNO()
         {
             Cadr cadr = new Cadr();
@@ -128,6 +177,10 @@ namespace NcLibrary
             return cadr;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type M5
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseM5()
         {
             Cadr cadr = new Cadr();
@@ -135,6 +188,10 @@ namespace NcLibrary
             return cadr;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type M4
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseM4(string cadrString)
         {
             Cadr cadr = new Cadr();
@@ -145,6 +202,10 @@ namespace NcLibrary
             return cadr;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type M3
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseM3(string cadrString)
         {
             Cadr cadr = new Cadr();
@@ -155,6 +216,10 @@ namespace NcLibrary
             return cadr;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type G0
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseG0(string cadrString)
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
@@ -190,6 +255,10 @@ namespace NcLibrary
             return null;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type G1
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseG1(string cadrString)
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
@@ -233,6 +302,10 @@ namespace NcLibrary
             return null;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type XY
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseXY(string cadrString)
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
@@ -254,6 +327,10 @@ namespace NcLibrary
             return null;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type XX
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseX(string cadrString)
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
@@ -273,6 +350,10 @@ namespace NcLibrary
             return null;
         }
 
+        /// <summary>
+        /// Parsing the string representation of a frame of type YY
+        /// </summary>
+        /// <returns>data frame</returns>
         private Cadr parseY(string cadrString)
         {
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
@@ -292,6 +373,12 @@ namespace NcLibrary
             return null;
         }
 
+        /// <summary>
+        /// Parsing the string representation of the X or Y coordinates represented by a decimal number in the frame
+        /// </summary>
+        /// <param name="cadr">data frame(required)</param>
+        /// <param name="dimension">type coordinates(required)</param>
+        /// <returns>valid numder</returns>
         private string ParseNumberDecimal(string cadr, string dimension)
         {
             cadr = cadr.Replace(" ", "");
@@ -312,6 +399,12 @@ namespace NcLibrary
             return number;
         }
 
+        /// <summary>
+        /// Parsing the string representation of the power S or speed F represented by a number of integer type in the frame
+        /// </summary>
+        /// <param name="cadr">data frame(required)</param>
+        /// <param name="dimension">type power or speed(required)</param>
+        /// <returns>valid numder</returns>
         private string ParseNumberInt(string cadr, string dimension)
         {
             cadr = cadr.Replace(" ", "");
@@ -331,6 +424,7 @@ namespace NcLibrary
             }
             return number;
         }
+        #endregion
 
     }
 }
