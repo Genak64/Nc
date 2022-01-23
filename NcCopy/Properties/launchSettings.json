@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NcCopy": {
+      "commandName": "Project",
+      "commandLineArgs": "part1.nc 2 2 10"
+    }
+  }
+}
