@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NCLibrary", "NCLibrary\NCLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NcCopy", "NcCopy\NcCopy.csproj", "{1A0D53DE-41EB-4A9D-A462-87863D602B49}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinNcCopy", "WinNcCopy\WinNcCopy.csproj", "{D6C955F3-1FE3-4A8F-BCF3-4E7BC9A1B109}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1A0D53DE-41EB-4A9D-A462-87863D602B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A0D53DE-41EB-4A9D-A462-87863D602B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A0D53DE-41EB-4A9D-A462-87863D602B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6C955F3-1FE3-4A8F-BCF3-4E7BC9A1B109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6C955F3-1FE3-4A8F-BCF3-4E7BC9A1B109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6C955F3-1FE3-4A8F-BCF3-4E7BC9A1B109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6C955F3-1FE3-4A8F-BCF3-4E7BC9A1B109}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
