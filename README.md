@@ -12,4 +12,5 @@ Generation of a program which contains 4 copies of the original program part1.nc
 
 ## WinNcCopy:  
 So far, it only reads the program in g-code (*.nc)  and renders it on a form.  
-To view it, run WinNcCopy and in the dialog box select the desired file with the extension nc.
+To view it, run WinNcCopy and in the dialog box select the desired file with the extension nc.  
+Viewed programs are automatically scaled to fit the viewing window.
