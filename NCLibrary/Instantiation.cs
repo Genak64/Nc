@@ -4,6 +4,14 @@ namespace NcLibrary
 {
     public class Instantiation
     {
+        /// <summary>
+        /// Reproduces the original g-code program in the X and Y directions and returns their text representation
+        /// </summary>
+        /// <param name="gcodeOriginal">original g-code program(required)</param>
+        /// <param name="Xquantity">number of copies in X direction(required)</param>
+        /// <param name="Yquantity">number of copies in Y direction(required)</param>
+        /// <param name="offset">copy spacing</param>
+        /// <returns>general text representation of original and copy programs</returns>
         public List<string> CreateCopyXY(List<string> gcodeOriginal, int Xquantity, int Yquantity, decimal offset = 0)
         {
             Gcode gcode = new Gcode();
@@ -29,7 +37,13 @@ namespace NcLibrary
 
             return gcode.GetCadres();
         }
-
+        /// <summary>
+        /// Reproduces the original g-code program in the X directions and returns their text representation
+        /// </summary>
+        /// <param name="gcodeOriginal">original g-code program(required)</param>
+        /// <param name="quantity">number of copies (required)</param>
+        /// <param name="offset">copy spacing</param>
+        /// <returns>general text representation of original and copy programs</returns>
         private List<string> CreateCopyOnX(List<string> gcodeOriginal, int quantity, decimal offset = 0)
         {
             Gcode gcode = new Gcode();
@@ -45,7 +59,13 @@ namespace NcLibrary
             }
             return gcode.GetCadres();
         }
-
+        /// <summary>
+        /// Reproduces the original g-code program in the Y directions and returns their text representation
+        /// </summary>
+        /// <param name="gcodeOriginal">original g-code program(required)</param>
+        /// <param name="quantity">number of copies (required)</param>
+        /// <param name="offset">copy spacing</param>
+        /// <returns>general text representation of original and copy programs</returns>
         private List<string> CreateCopyOnY(List<string> gcodeOriginal, int quantity, decimal offset = 0)
         {
             Gcode gcode = new Gcode();
@@ -61,7 +81,12 @@ namespace NcLibrary
             }
             return gcode.GetCadres();
         }
-
+        /// <summary>
+        /// Offsets the original program by a given value in the X direction and returns the text representation of the program with the offset
+        /// </summary>
+        /// <param name="gcodeOriginal">original g-code program(required)</param>
+        /// <param name="offset">X-axis offset(required)</param>
+        /// <returns></returns>
         private List<string> CopyToX(List<string> gcodeOriginal, decimal offset)
         {
             Gcode gcode = new Gcode();
@@ -69,7 +94,12 @@ namespace NcLibrary
             gcode.TranslateX(offset);
             return gcode.GetCadres();
         }
-
+        /// <summary>
+        /// Offsets the original program by a given value in the Y direction and returns the text representation of the program with the offset
+        /// </summary>
+        /// <param name="gcodeOriginal">original g-code program(required)</param>
+        /// <param name="offset">Н-axis offset(required)</param>
+        /// <returns></returns>
         private List<string> CopyToY(List<string> gcodeOriginal, decimal offset)
         {
             Gcode gcode = new Gcode();
