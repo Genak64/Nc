@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NcLibrary
 {
@@ -118,7 +119,19 @@ namespace NcLibrary
             return point;
         }
 
+        public List<Point2D> Rotate(List<Point2D> oldPoints, decimal angle, Point2D centerPoint)
+        {
+            List<Point2D> newPoints = new List<Point2D>();
+            decimal angleRadian = angle * (decimal)Math.PI / 180;
 
+            foreach (Point2D point in oldPoints)
+            {
+                decimal x = Math.Round(((point.x - centerPoint.x) * (decimal)Math.Cos((double)angleRadian) - (point.y - centerPoint.y) * (decimal)Math.Sin((double)angleRadian) + centerPoint.x), 2);
+                decimal y = Math.Round(((point.x - centerPoint.x) * (decimal)Math.Sin((double)angleRadian) - (point.y - centerPoint.y) * (decimal)Math.Cos((double)angleRadian) + centerPoint.y), 2);
+                newPoints.Add(new Point2D(x, y));
+            }
+            return newPoints;
+        }
 
 
     }
