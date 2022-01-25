@@ -11,6 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinNcCopy", "WinNcCopy\WinN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XTestNcCopy", "XTestNcCopy\XTestNcCopy.csproj", "{F06A7E88-65D5-4A27-B5CE-5BF3A1D97A40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NcRotate", "NcRotate\NcRotate.csproj", "{A4B63A57-1141-416F-ADFB-D4564E14354F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7770A728-E323-4533-960B-93390D9DA3E4} = {7770A728-E323-4533-960B-93390D9DA3E4}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +38,10 @@ Global
 		{F06A7E88-65D5-4A27-B5CE-5BF3A1D97A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F06A7E88-65D5-4A27-B5CE-5BF3A1D97A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F06A7E88-65D5-4A27-B5CE-5BF3A1D97A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B63A57-1141-416F-ADFB-D4564E14354F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B63A57-1141-416F-ADFB-D4564E14354F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B63A57-1141-416F-ADFB-D4564E14354F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B63A57-1141-416F-ADFB-D4564E14354F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

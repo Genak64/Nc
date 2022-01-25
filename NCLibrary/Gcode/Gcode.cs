@@ -176,7 +176,7 @@ namespace NcLibrary
             }
         }
 
-        public void Rotate(decimal angle, Point2D centerPoint)
+        public void Rotate(decimal angle,decimal centerPointX, decimal centerPointY)
         {
             decimal angleRadian = angle * (decimal)Math.PI / 180;
 
@@ -184,11 +184,11 @@ namespace NcLibrary
 
                 if (cadres[i].xEnable || cadres[i].yEnable)
                 {
-                    decimal x = Math.Round(((cadres[i].X - centerPoint.x) * (decimal)Math.Cos((double)angleRadian) - (cadres[i].Y - centerPoint.y) * (decimal)Math.Sin((double)angleRadian) + centerPoint.x), 2);
+                    decimal x = Math.Round(((cadres[i].X - centerPointX) * (decimal)Math.Cos((double)angleRadian) - (cadres[i].Y - centerPointY) * (decimal)Math.Sin((double)angleRadian) + centerPointX), 2);
                     cadres[i].xEnable = true;
                     cadres[i].X = x;
                
-                    decimal y = Math.Round(((cadres[i].X - centerPoint.x) * (decimal)Math.Sin((double)angleRadian) - (cadres[i].Y - centerPoint.y) * (decimal)Math.Cos((double)angleRadian) + centerPoint.y), 2);
+                    decimal y = Math.Round(((cadres[i].X - centerPointX) * (decimal)Math.Sin((double)angleRadian) - (cadres[i].Y - centerPointY) * (decimal)Math.Cos((double)angleRadian) + centerPointY), 2);
                     cadres[i].yEnable = true;
                     cadres[i].Y = y;
                 }

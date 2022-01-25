@@ -387,7 +387,7 @@ namespace NcLibrary
 
             for (int i = pos + 1; i < cadr.Length; i++)
             {
-                if (Char.IsDigit(cadr[i]) || cadr[i] == '.')
+                if (Char.IsDigit(cadr[i]) || cadr[i] == '.'|| cadr[i]=='-')
                 {
                     number += cadr[i];
                 }

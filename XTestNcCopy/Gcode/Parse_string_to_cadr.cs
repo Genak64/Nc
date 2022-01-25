@@ -74,6 +74,7 @@ namespace XTestNcCopy
         [InlineData("G0X0.51 Y5.62")]
         [InlineData("G0 X0.51 Y5.62 Z0 dsfdfsdf")]
         [InlineData("G0X0.51Y5.62Z0dsfdfsdf")]
+       
         [Theory]
         public void parseG0(string cadrString)
         {
@@ -87,6 +88,25 @@ namespace XTestNcCopy
             Assert.Equal("G0", cadr.type);
             Assert.Equal(0.51M, cadr.X);
             Assert.Equal(5.62M, cadr.Y);
+        }
+
+        [InlineData("G0X-0.51Y-5.62")]
+        [InlineData("G0X0.51Y-5.62")]
+        [InlineData("G0X-0.51Y5.62")]
+
+        [Theory]
+        public void parseG0Sign(string cadrString)
+        {
+            //Arrange
+            Cadr cadr = new Cadr();
+
+            //Act
+            cadr = cadr.StringToCadr(cadrString);
+
+            //Assert
+            Assert.Equal("G0", cadr.type);
+            Assert.Equal(0.51M, Math.Abs(cadr.X));
+            Assert.Equal(5.62M, Math.Abs(cadr.Y));
         }
 
 
