@@ -167,7 +167,7 @@ namespace XTestNcCopy
             cadr = cadr.StringToCadr(cadrString);
 
             //Assert
-            Assert.Equal("XX", cadr.type);
+            Assert.Equal("XY", cadr.type);
             Assert.Equal(0.51M, cadr.X);
         }
 
@@ -185,7 +185,7 @@ namespace XTestNcCopy
             cadr = cadr.StringToCadr(cadrString);
 
             //Assert
-            Assert.Equal("YY", cadr.type);
+            Assert.Equal("XY", cadr.type);
             Assert.Equal(5.62M, cadr.Y);
         }
 

@@ -117,10 +117,10 @@ namespace NcLibrary
             decimal Ymin = gcode.GetMinY();
             decimal Xmax = gcode.GetMaxX();
             decimal Xmin = gcode.GetMinX();
-            decimal deltaY = Ymax > Ymin ? Ymax - Ymin : Ymin - Ymax;
-            decimal deltaX = Xmax > Xmin ? Xmax - Xmin : Xmin - Xmax;
-            decimal centerPointX = Xmax > Xmin ? Xmin+ deltaX/2 : Xmax + deltaX / 2;
-            decimal centerPointY = Ymax > Ymin ? Ymin + deltaY / 2 : Ymax + deltaY / 2;
+            decimal deltaY = Ymax >= Ymin ? Ymax - Ymin : Ymin - Ymax;
+            decimal deltaX = Xmax >= Xmin ? Xmax - Xmin : Xmin - Xmax;
+            decimal centerPointX = Xmax >= Xmin ? Xmin+ deltaX/2 : Xmax + deltaX / 2;
+            decimal centerPointY = Ymax >= Ymin ? Ymin + deltaY / 2 : Ymax + deltaY / 2;
 
             gcode.Rotate(angle, centerPointX, centerPointY);
             return gcode.GetCadres();

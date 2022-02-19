@@ -147,5 +147,29 @@ namespace XTestNcCopy
             //Assert
             Assert.Equal((ymax + 12.5M), gcode.GetMaxY());
         }
+
+        [Fact]
+        public void Rotatetest()
+        {
+            //Arrange
+            Gcode gcode = new Gcode();
+            gcodeString = new List<string>();
+            gcodeString.Add("X0Y0");
+            gcodeString.Add("X10Y0");
+
+            List<string> gcodeStringRot = new List<string>();
+
+            //Act
+            gcode.SetCadres(gcodeString);
+            gcode.Rotate(-90, 5, 0);
+
+            gcodeStringRot = gcode.GetCadres();
+
+            //Assert
+            Assert.Equal("X5.00Y5", gcodeStringRot[0]);
+            Assert.Equal("X5.00Y-5", gcodeStringRot[1]);
+            
+
+        }
     }
 }

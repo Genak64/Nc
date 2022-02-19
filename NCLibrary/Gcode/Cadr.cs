@@ -45,6 +45,9 @@ namespace NcLibrary
         /// The presence of the Y coordinate value in the frame 
         /// </summary>
         public bool yEnable { get; set; }
+
+        private static decimal prevX { get; set; }
+        private static decimal prevY { get; set; }
         #endregion
 
         /// <summary>
@@ -236,6 +239,10 @@ namespace NcLibrary
                 cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.xEnable = true;
                 cadr.yEnable = true;
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
 
@@ -243,6 +250,13 @@ namespace NcLibrary
             {
                 cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
                 cadr.xEnable = true;
+
+                cadr.Y = prevY;
+                cadr.yEnable = true;
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
 
@@ -250,6 +264,13 @@ namespace NcLibrary
             {
                 cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.yEnable = true;
+
+                cadr.X = prevX;
+                cadr.xEnable = true;
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
             return null;
@@ -283,6 +304,10 @@ namespace NcLibrary
                 cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.xEnable = true;
                 cadr.yEnable = true;
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
 
@@ -290,6 +315,14 @@ namespace NcLibrary
             {
                 cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
                 cadr.xEnable = true;
+
+                cadr.Y = prevY;
+                cadr.yEnable = true;
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
+
                 return cadr;
             }
 
@@ -297,6 +330,13 @@ namespace NcLibrary
             {
                 cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.yEnable = true;
+
+                cadr.X = prevX;
+                cadr.xEnable = true;
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
             return null;
@@ -322,6 +362,10 @@ namespace NcLibrary
                 cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.xEnable = true;
                 cadr.yEnable = true;
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
             return null;
@@ -345,6 +389,15 @@ namespace NcLibrary
             {
                 cadr.X = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "X"), formatter);
                 cadr.xEnable = true;
+
+               
+                cadr.Y = prevY;
+                cadr.yEnable = true;
+                cadr.type = "XY";
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
             return null;
@@ -368,6 +421,15 @@ namespace NcLibrary
             {
                 cadr.Y = decimal.Parse(cadr.ParseNumberDecimal(cadrString, "Y"), formatter);
                 cadr.yEnable = true;
+
+                
+                cadr.X = prevX;
+                cadr.xEnable = true;
+                cadr.type = "XY";
+
+                prevX = cadr.X;
+                prevY = cadr.Y;
+
                 return cadr;
             }
             return null;
