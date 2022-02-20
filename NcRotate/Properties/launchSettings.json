@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NcRotate": {
+      "commandName": "Project",
+      "commandLineArgs": "part2.nc 45"
+    }
+  }
+}

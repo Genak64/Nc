@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace NcLibrary
 {
@@ -105,6 +106,41 @@ namespace NcLibrary
             Gcode gcode = new Gcode();
             gcode.SetCadres(gcodeOriginal);
             gcode.TranslateY(offset);
+            return gcode.GetCadres();
+        }
+
+        public List<string> CopyToRotate(List<string> gcodeOriginal,decimal angle)
+        {
+            Gcode gcode = new Gcode();
+            gcode.SetCadres(gcodeOriginal);
+
+            decimal Ymax = gcode.GetMaxY();
+            decimal Ymin = gcode.GetMinY();
+            decimal Xmax = gcode.GetMaxX();
+            decimal Xmin = gcode.GetMinX();
+            decimal deltaY = Ymax >= Ymin ? Ymax - Ymin : Ymin - Ymax;
+            decimal deltaX = Xmax >= Xmin ? Xmax - Xmin : Xmin - Xmax;
+            decimal centerPointX = Xmax >= Xmin ? Xmin+ deltaX/2 : Xmax + deltaX / 2;
+            decimal centerPointY = Ymax >= Ymin ? Ymin + deltaY / 2 : Ymax + deltaY / 2;
+
+            gcode.Rotate(angle, centerPointX, centerPointY);
+            return gcode.GetCadres();
+        }
+
+        public List<string> MoveToWorkField(List<string> gcodeOriginal)
+        {
+            Gcode gcode = new Gcode();
+            gcode.SetCadres(gcodeOriginal);
+
+            decimal Ymin = gcode.GetMinY();
+            decimal Xmin = gcode.GetMinX();
+
+            if (Ymin < 0) gcode.TranslateY(Math.Abs(Ymin));
+            if (Xmin < 0) gcode.TranslateX(Math.Abs(Xmin));
+
+            if (Ymin > 0) gcode.TranslateY(-Ymin);
+            if (Xmin > 0) gcode.TranslateX(-Xmin);
+
             return gcode.GetCadres();
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -174,5 +175,32 @@ namespace NcLibrary
                 }
             }
         }
+
+        public void Rotate(decimal angle,decimal centerPointX, decimal centerPointY)
+        {
+            decimal angleRadian = angle * (decimal)Math.PI / 180;
+            decimal tempX = 0, tempY = 0;
+
+            for (int i=0; i < cadres.Count(); i++) {
+
+                if (cadres[i].xEnable || cadres[i].yEnable)
+                {
+
+                    decimal x = Math.Round(((cadres[i].X - centerPointX) * (decimal)Math.Cos((double)angleRadian) - (cadres[i].Y - centerPointY) * (decimal)Math.Sin((double)angleRadian) + centerPointX), 2);
+                    cadres[i].xEnable = true;
+                    tempX = x;
+               
+                    decimal y = Math.Round(((cadres[i].X - centerPointX) * (decimal)Math.Sin((double)angleRadian) + (cadres[i].Y - centerPointY) * (decimal)Math.Cos((double)angleRadian) + centerPointY), 2);
+                    cadres[i].yEnable = true;
+                    tempY = y;
+
+                    cadres[i].X = tempX;
+                    cadres[i].Y = tempY;
+
+                }
+            }
+        }
+
+
     }
 }
