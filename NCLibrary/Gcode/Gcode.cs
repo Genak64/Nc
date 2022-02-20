@@ -180,23 +180,12 @@ namespace NcLibrary
         {
             decimal angleRadian = angle * (decimal)Math.PI / 180;
             decimal tempX = 0, tempY = 0;
-            decimal prevX = 0, prevY = 0;
-
 
             for (int i=0; i < cadres.Count(); i++) {
 
                 if (cadres[i].xEnable || cadres[i].yEnable)
                 {
-/*
-                    if (!cadres[i].xEnable)
-                    {
-                        cadres[i].X = prevX;
-                    }
-                    if (!cadres[i].yEnable)
-                    {
-                        cadres[i].Y = prevY;
-                    }
-*/
+
                     decimal x = Math.Round(((cadres[i].X - centerPointX) * (decimal)Math.Cos((double)angleRadian) - (cadres[i].Y - centerPointY) * (decimal)Math.Sin((double)angleRadian) + centerPointX), 2);
                     cadres[i].xEnable = true;
                     tempX = x;
@@ -208,8 +197,6 @@ namespace NcLibrary
                     cadres[i].X = tempX;
                     cadres[i].Y = tempY;
 
-                    prevX = tempX;
-                    prevY = tempY;
                 }
             }
         }

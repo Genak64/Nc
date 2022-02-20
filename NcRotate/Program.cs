@@ -36,7 +36,7 @@ namespace NcRotate
                             return;
                         }
 
-                        GcodeIO.Save(args[0], inst.CopyToRotate(code,angle));
+                        GcodeIO.Save(args[0], inst.MoveToWorkField(inst.CopyToRotate(code,angle)));
 
                         
                         Console.WriteLine($"{args[0]} saved");

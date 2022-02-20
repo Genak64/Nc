@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace NcLibrary
 {
@@ -123,6 +124,23 @@ namespace NcLibrary
             decimal centerPointY = Ymax >= Ymin ? Ymin + deltaY / 2 : Ymax + deltaY / 2;
 
             gcode.Rotate(angle, centerPointX, centerPointY);
+            return gcode.GetCadres();
+        }
+
+        public List<string> MoveToWorkField(List<string> gcodeOriginal)
+        {
+            Gcode gcode = new Gcode();
+            gcode.SetCadres(gcodeOriginal);
+
+            decimal Ymin = gcode.GetMinY();
+            decimal Xmin = gcode.GetMinX();
+
+            if (Ymin < 0) gcode.TranslateY(Math.Abs(Ymin));
+            if (Xmin < 0) gcode.TranslateX(Math.Abs(Xmin));
+
+            if (Ymin > 0) gcode.TranslateY(-Ymin);
+            if (Xmin > 0) gcode.TranslateX(-Xmin);
+
             return gcode.GetCadres();
         }
 
