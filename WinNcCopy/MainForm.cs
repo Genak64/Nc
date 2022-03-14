@@ -57,6 +57,7 @@ namespace WinNcCopy
 
             label1.Text = "file " + openFileDialogLoad.SafeFileName + " is load";
 
+            Session.Instance.SetOriginal(gcode.GetCadres());
         }
 
         public void LoadEvent(object sender, EventArgs e)
@@ -93,8 +94,48 @@ namespace WinNcCopy
 
         }
 
-   
+        public void DrawsString(List<string> program, decimal scale)
+        {
+
+            DrawShapes d = new DrawShapes(pb2DGrafics.CreateGraphics());
+
+            pb2DGrafics.Size = d.SetViewport(700, 500);
+            d.SetScale(scale);
+            d.Axis();
 
 
+            GcodeDraw draw = new GcodeDraw();
+
+            draw.SetCadres(program);
+
+            d.SetShapes(draw.GetShapes());
+            d.Shapes();
+
+
+        }
+
+
+        public void btnCopyApply_Click(object sender, EventArgs e)
+        {
+            decimal Xmax, Ymax, max, scale;
+
+            int x = (int)numByX.Value;
+            int y = (int)numByY.Value;
+            int offset = (int)numOffset.Value;
+
+            Instantiation inst = new Instantiation();
+            Session.Instance.SetModified(inst.CreateCopyXY(Session.Instance.GetOriginal(),x,y,offset));
+
+            Gcode gcode = new Gcode();
+
+            gcode.SetCadres(Session.Instance.GetModified());
+            Xmax = gcode.GetMaxX();
+            Ymax = gcode.GetMaxY();
+            max = Xmax > Ymax ? Xmax : Ymax;
+            scale = (500 / max) * 0.9M;
+
+            DrawsString(Session.Instance.GetModified(),scale);
+           
+        }
     }
 }
