@@ -17,8 +17,12 @@ namespace WinNcCopy
         public MainForm()
         {
             InitializeComponent();
+
+            label1.Text = "";
+
             timer1.Start();
             timer1.Tick += LoadEvent;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,7 +41,7 @@ namespace WinNcCopy
             openFileDialogLoad.ShowDialog();
 
             pathfile = openFileDialogLoad.FileName;
-
+           
             Gcode gcode = new Gcode();
             
             //set scale
@@ -50,6 +54,8 @@ namespace WinNcCopy
             //MessageBox.Show(openFileDialog1.FileName);
 
             Draws(pathfile,scale);
+
+            label1.Text = "file " + openFileDialogLoad.SafeFileName + " is load";
 
         }
 
