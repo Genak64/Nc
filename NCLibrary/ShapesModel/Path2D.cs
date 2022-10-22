@@ -2,7 +2,7 @@
 
 namespace NcLibrary
 {
-    public class Path2D
+    public class Path2D: IPath2D
     {
         public List<Point2D> path { get; set; }
         public bool closed { get; set; }

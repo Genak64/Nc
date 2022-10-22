@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NcLibrary
 {
-    public class Gcode
+    public class Gcode: IGcode
     {
         /// <summary>
         /// Program representation in g-code in the instance as data

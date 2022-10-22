@@ -1,7 +1,7 @@
 ﻿
 namespace NcLibrary
 {
-    public class Point2D
+    public class Point2D:IPoint2D
     {
         public decimal x { get; set; }
         public decimal y { get; set; }

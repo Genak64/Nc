@@ -102,16 +102,36 @@ namespace WinNcCopy
             // numByX
             // 
             this.numByX.Location = new System.Drawing.Point(40, 22);
+            this.numByX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numByX.Name = "numByX";
             this.numByX.Size = new System.Drawing.Size(55, 23);
             this.numByX.TabIndex = 5;
+            this.numByX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numByY
             // 
             this.numByY.Location = new System.Drawing.Point(40, 53);
+            this.numByY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numByY.Name = "numByY";
             this.numByY.Size = new System.Drawing.Size(55, 23);
             this.numByY.TabIndex = 6;
+            this.numByY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // groupCopyXY
             // 
@@ -166,7 +186,7 @@ namespace WinNcCopy
             this.Controls.Add(this.btnDraw);
             this.Controls.Add(this.pb2DGrafics);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "NC";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pb2DGrafics)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numByX)).EndInit();
